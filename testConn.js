@@ -1,4 +1,4 @@
-// testConn.js
+
 const pool = require('./db');
 
 async function testConnection() {

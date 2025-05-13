@@ -1,30 +1,34 @@
-const { sequelize, DataTypes } = require('../orm');
+const { sequelize } = require('../orm');
 const Student = require('./Student');
-const Course = require('./Course');
 const Department = require('./Department');
+const Course = require('./Course');
 const Enrollment = require('./Enrollment');
 
-// Student 和 Department 的關聯
+// 設定一對多關係：部門與學生
 Department.hasMany(Student, { foreignKey: 'Department_ID' });
 Student.belongsTo(Department, { foreignKey: 'Department_ID' });
 
-// Course 和 Department 的關聯
+// 設定一對多關係：部門與課程
 Department.hasMany(Course, { foreignKey: 'Department_ID' });
 Course.belongsTo(Department, { foreignKey: 'Department_ID' });
 
-// Enrollment 和 Student 的關聯 (多對多)
-Student.hasMany(Enrollment, { foreignKey: 'Student_ID' });
-Enrollment.belongsTo(Student, { foreignKey: 'Student_ID' });
+// 設定多對多關係：學生與課程，透過 Enrollment
+Student.belongsToMany(Course, { 
+  through: Enrollment, 
+  foreignKey: 'Student_ID',
+  otherKey: 'Course_ID'
+});
 
-// Enrollment 和 Course 的關聯 (多對多)
-Course.hasMany(Enrollment, { foreignKey: 'Course_ID' });
-Enrollment.belongsTo(Course, { foreignKey: 'Course_ID' });
+Course.belongsToMany(Student, { 
+  through: Enrollment, 
+  foreignKey: 'Course_ID',
+  otherKey: 'Student_ID'
+});
 
-// 將所有模型匯出
 module.exports = {
+  sequelize,
   Student,
-  Course,
   Department,
-  Enrollment,
-  sequelize
+  Course,
+  Enrollment
 };

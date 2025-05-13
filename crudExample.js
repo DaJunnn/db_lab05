@@ -15,7 +15,6 @@ async function basicCrud() {
       console.log('查無此人');
       return;
     }
-
     // 1. INSERT 新增
     let sql = 'INSERT INTO STUDENT (Student_ID, Name, Gender, Email, Department_ID) VALUES (?, ?, ?, ?, ?)';
     await conn.query(sql, ['S10810001', '王曉明', 'M', 'wang@example.com', 'CS001']);
@@ -30,7 +29,7 @@ async function basicCrud() {
     const sql = 'UPDATE STUDENT SET NAME = ? WHERE Student_ID = ?';
     await conn.query(sql, [newName, studentId]);
     console.log('已更新學生名稱');
-    
+
      // 4. DELETE 刪除
      sql = 'DELETE FROM STUDENT WHERE Student_ID = ?';
      await conn.query(sql, ['S10810001']);

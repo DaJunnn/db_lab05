@@ -9,38 +9,14 @@ const Student = sequelize.define('Student', {
     type: DataTypes.STRING(50),
     allowNull: false
   },
-  Birth_Date: {
-    type: DataTypes.DATE,
-    allowNull: true
-  },
   Gender: {
-    type: DataTypes.CHAR(1),
-    allowNull: true
+    type: DataTypes.CHAR(1)
   },
   Email: {
-    type: DataTypes.STRING(100),
-    allowNull: true,
-    unique: true
-  },
-  Phone: {
-    type: DataTypes.STRING(15),
-    allowNull: true
-  },
-  Address: {
-    type: DataTypes.STRING(200),
-    allowNull: true
-  },
-  Admission_Year: {
-    type: DataTypes.INTEGER,
-    allowNull: true
-  },
-  Status: {
-    type: DataTypes.STRING(10),
-    allowNull: true
+    type: DataTypes.STRING(100)
   },
   Department_ID: {
-    type: DataTypes.STRING(5),
-    allowNull: true
+    type: DataTypes.STRING(5)
   }
 }, {
   tableName: 'STUDENT',
